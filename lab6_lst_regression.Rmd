@@ -57,7 +57,7 @@ We will start by exploring the distribution of our variables.
 #Code goes here.
 LST_plot <- ggplot(lab6_data, aes(x = lst_c)) + 
   geom_histogram() + 
-  labs(title = "Landsat Temp (C)")
+  labs(title = "Landsat Temp (°C)")
 
 NDVI_plot <- ggplot(lab6_data, aes(x = ndvi)) + 
   geom_histogram() + 
@@ -77,17 +77,17 @@ PRISM_ppt_plot <- ggplot(lab6_data, aes(x = prism_ppt_mm)) +
 
 slope_plot <- ggplot(lab6_data, aes(x = slope)) + 
   geom_histogram() + 
-  labs(title = "Slope") 
+  labs(title = "Slope (°)") 
 
 elevation_plot <- ggplot(lab6_data, aes(x = elevation)) + 
   geom_histogram() + 
-  labs(title = "Elevation") 
+  labs(title = "Elevation (m)") 
 
-wrap_plots(LST_plot,NDVI_plot,Impervious_pct_plot,PRISM_ppt_plot,slope_plot,elevation_plot, ncol = 3)
+wrap_plots(LST_plot,NDVI_plot,Impervious_pct_plot,PRISM_ppt_plot,slope_plot,elevation_plot, ncol = 3) #Needed some help here, but this seems to make the plots more visually appealing and interpretable. 
 
 ```
 
-{Your assessment of the variables' normality goes here.}
+It appears that Landsat Temp is the most normal variable here (although it certainly is not a perfectly normal distribution). NDVI and Imprevious % are also somewhat normal; however, NDVI is skewed to the right and Impervious % has far too many areas that have no impervious cover. The remaining variables (PRISM, Slope, and Elevation) are all strongly right skewed.  
 
 **Question 2** _Use tmap to map these same variables using "fisher" as the classification method/style. For an extra challenge, use `tmap_arrange` to plot all maps in a single figure._
 
