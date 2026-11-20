@@ -92,7 +92,8 @@ It appears that Landsat Temp is the most normal variable here (although it certa
 **Question 2** _Use tmap to map these same variables using "fisher" as the classification method/style. For an extra challenge, use `tmap_arrange` to plot all maps in a single figure._
 
 ```{r}
-
+tm_shape(lab6_data)+
+  tm_bubbles(fill="AvgDLSpF",size=0.5)
 ```
 
 
