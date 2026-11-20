@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(sf)
 library(tidyverse)
 library(tmap)
+library(patchwork) #Did this so I could make a better figure on Task 1
 ```
 
 **Overview:**
@@ -25,7 +26,7 @@ This lab focuses on regression techniques. You'll be analyzing the association o
 Let's import the dataset.
 
 ```{r}
-lab6_data<-st_read("data/lab6_gee_lstdata.gpkg") 
+lab6_data<-st_read("geog4300_lab6_godawgsbeatchickens/data/lab6_gee_lstdata.gpkg") 
 ```
 
 The variables in the dataset are:
@@ -54,6 +55,36 @@ We will start by exploring the distribution of our variables.
 
 ```{r}
 #Code goes here.
+LST_plot <- ggplot(lab6_data, aes(x = lst_c)) + 
+  geom_histogram() + 
+  labs(title = "Landsat Temp (C)")
+
+NDVI_plot <- ggplot(lab6_data, aes(x = ndvi)) + 
+  geom_histogram() + 
+  labs(title = "NDVI") 
+
+Impervious_pct_plot <- ggplot(lab6_data, aes(x = impervious_pct)) + 
+  geom_histogram() + 
+  labs(title = "Impervious %") 
+
+Tree_cover_pct_plot <- ggplot(lab6_data, aes(x = tree_cover_pct)) + 
+  geom_histogram() + 
+  labs(title = "Tree Cover %") 
+
+PRISM_ppt_plot <- ggplot(lab6_data, aes(x = prism_ppt_mm)) + 
+  geom_histogram() + 
+  labs(title = "PRISM Precip (mm)")
+
+slope_plot <- ggplot(lab6_data, aes(x = slope)) + 
+  geom_histogram() + 
+  labs(title = "Slope") 
+
+elevation_plot <- ggplot(lab6_data, aes(x = elevation)) + 
+  geom_histogram() + 
+  labs(title = "Elevation") 
+
+wrap_plots(LST_plot,NDVI_plot,Impervious_pct_plot,PRISM_ppt_plot,slope_plot,elevation_plot, ncol = 3)
+
 ```
 
 {Your assessment of the variables' normality goes here.}
@@ -119,7 +150,7 @@ We will start by exploring the distribution of our variables.
 
 **Challenge question**
 
-So far we have treated land cover only through continuous variables. Add the land cover class (`nlcd_label`) to your multivariate model from Question 5 as a categorical variable. Use `relevel()` or `fct_relevel()` to choose a meaningful reference category (for example, Developed, medium). Interpret the coefficients for the land cover categories relative to your reference category, and explain how the coefficients for the continuous variables changed after adding land cover. Also chart and map the residuals of the new model to assess whether it improves on the model from Question 5. Finally, write a short section that summarises what, if anything, this model tells you.
+So far we have treated land cover only through continuous variables. Add the land cover class (`nlcd_label`) to your multivariate model from Question 5 as a categorical variable. Use `relevel()` or `fct_relevel()` to choose a meaningful reference category (for example, Developed, medium). Interpret the coefficients for the land cover categories relative to your reference category, and explain how the coefficients for the continuous variables changed after adding land cover. Also chart and map the residuals of the new model to assess whether it improves on the model from Question 5. Finally, write a short section that summarizes what, if anything, this model tells you.
 
 ```{r}
 
